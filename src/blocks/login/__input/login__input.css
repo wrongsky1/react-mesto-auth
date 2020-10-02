@@ -1,0 +1,13 @@
+@import url(./_email/login__input_email.css);
+@import url(./_pswd/login__input_pswd.css);
+
+.login__input {
+    font-size: 14px;
+    line-height: 17px;
+    height: 27px;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    outline: none;
+    background-color: inherit;
+    color: white;
+}

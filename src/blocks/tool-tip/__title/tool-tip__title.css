@@ -1,0 +1,32 @@
+.tool-tip__title {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    line-height: 29px;
+    max-width: 358px;
+    margin: 0 auto 60px;
+}
+
+@media screen and (max-width: 768px) {
+    .tool-tip__title {
+        font-size: 24px;
+        line-height: 29px;
+        margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .tool-tip__title {
+        font-size: 22px;
+        line-height: 26px;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .tool-tip__title {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 10px;
+    }
+}
