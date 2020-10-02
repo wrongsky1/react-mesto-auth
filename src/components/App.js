@@ -1,17 +1,30 @@
 import React from 'react';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import api from '../utils/api'
+import * as auth from '../utils/auth';
 import '../index.css';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
+import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup'
 import ImagePopup from './ImagePopup.js';
 import DeletePopup from './DeletePopup';
+import Login from './Login';
+import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
+import InfoTooltip from './InfoTooltip';
+import PageNotFound from './PageNotFound';
+
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [infoLoginUser, setInfoLoginUser] = React.useState('');
+  const [registerSuccess, setRegisterSuccess] = React.useState(false);
+  const history = useHistory();
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isPopupProfileOpen, setIsPopupProfileOpen] = React.useState(false);
@@ -142,12 +155,76 @@ React.useEffect(() => {
   };
 })
 
+const handleCheckToken = () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    auth.getInfoLogin(token).then((getInfo) => {
+      setLoggedIn(true);
+      history.push('/my-profile');
+      return setInfoLoginUser(getInfo);
+    });
+  }
+};
+
+React.useEffect(() => {
+  handleCheckToken();
+  Promise.all([api.getInfoUser(), api.getInitialCards()]).then(([userData, cardsFromApi]) => {
+    setCurrentUser(userData);
+    setCards(cardsFromApi);
+  }).catch((err) => {
+    return console.log(err);
+  });
+}, []);
+
+const handleLogin = (data, setMessageError, setError) => {
+  auth.authorize(data).then((res) => {
+    if (!res.token) {
+      setMessageError(res.message || res.error);
+      return setError(true);
+    }
+    return auth.getInfoLogin(res.token).then((getInfo) => {
+      setLoggedIn(true);
+      history.push('/my-profile');
+      return setInfoLoginUser(getInfo);
+    });
+  }).catch((err) => {
+    setError(true);
+    return console.log(err);
+  });
+};
+
+const handleRegister = (data, setMessageError, setError) => {
+  auth.register(data).then((res) => {
+    if (res.data) {
+      setLoggedIn(true);
+      history.push('/my-profile');
+      setInfoLoginUser(res.data);
+      return setRegisterSuccess(true);
+    }
+    setMessageError(res.error || res.message);
+    return setError(true);
+  });
+};
+
+const signOut = () => {
+  localStorage.removeItem('token');
+  history.push('/sign-in');
+  setRegisterSuccess(false);
+};
+
+const toggleBurgerMenu = () => {
+  const btn = document.querySelector('.burger-menu');
+  const header = document.querySelector('.header');
+  btn.classList.toggle('burger-menu_active');
+  header.classList.toggle('header_burger-menu');
+};
+
 return (
   <div className="App">
     <div className="body">
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header/>
 
         <Main
           onEditProfile={handleEditProfileClick} 
