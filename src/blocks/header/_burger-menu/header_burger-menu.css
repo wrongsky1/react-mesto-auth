@@ -1,0 +1,13 @@
+@media screen and (max-width: 400px) {
+  .header_burger-menu {
+    padding-top: 142px;
+    transition: 0.5s ease;
+  }
+  .header_burger-menu::before {
+    content: '';
+    position: absolute;
+    margin-top: -27px;
+    border-top: 1px solid #545454;
+    width: 100%;
+  }
+}

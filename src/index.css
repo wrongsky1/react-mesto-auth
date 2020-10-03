@@ -13,3 +13,6 @@
 @import url(./blocks/popup/__error_visible/popup__error_visible.css);
 @import url(./blocks/login/login.css);
 @import url(./blocks/tool-tip/tool-tip.css);
+@import url(./blocks/burger-menu/burger-menu.css);
+@import url(./blocks/burger-menu/_active/burger-menu_active.css);
+@import url(./blocks/not-found/not-found.css);

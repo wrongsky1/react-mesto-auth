@@ -166,16 +166,6 @@ const handleCheckToken = () => {
   }
 };
 
-React.useEffect(() => {
-  handleCheckToken();
-  Promise.all([api.getInfoUser(), api.getInitialCards()]).then(([userData, cardsFromApi]) => {
-    setCurrentUser(userData);
-    setCards(cardsFromApi);
-  }).catch((err) => {
-    return console.log(err);
-  });
-}, []);
-
 const handleLogin = (data, setMessageError, setError) => {
   auth.authorize(data).then((res) => {
     if (!res.token) {
@@ -223,52 +213,80 @@ return (
   <div className="App">
     <div className="body">
     <div className="page">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header/>
+      <Switch>
+        <Route path="/sign-in">
+          <Login handleLogin={handleLogin} />
+        </Route>
+        <Route path="/sign-up">
+          <Register handleRegister={handleRegister} />
+        </Route>
+        <ProtectedRoute
+          path="/"
+          loggedIn={loggedIn}
+          Component={(
+            <CurrentUserContext.Provider value={currentUser}>
+              
+                
+                <Header>
+                  <div className="header__info">
+                    <p className="header__email">{infoLoginUser.email}</p>
+                    <button type="button" className="header__sign-out" onClick={signOut}>Выйти</button>
+                  </div>
+                  <span className="burger-menu" onClick={toggleBurgerMenu} />
+                </Header>
 
-        <Main
-          onEditProfile={handleEditProfileClick} 
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          onSetCards={handleSetCards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleRequestDelete}
-          cards={cards}
+                <Main
+                  onEditProfile={handleEditProfileClick} 
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onCardClick={handleCardClick}
+                  onSetCards={handleSetCards}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleRequestDelete}
+                  cards={cards}
+                />
+                <Footer />
+
+                <EditAvatarPopup
+                  isOpen={isPopupAvatarEditOpen}
+                  onClose={closeAllPopups}
+                  onUpdateAvatar={handleUpdateAvatar}
+                />
+
+                <EditProfilePopup
+                  isOpen={isPopupProfileOpen}
+                  onClose={closeAllPopups}
+                  onUpdateUser={handleUpdateUser}
+                />
+
+                <AddPlacePopup
+                  isOpen={isPopupAddPlaceOpen}
+                  onClose={closeAllPopups}
+                  onAddPlace={handleAddPlaceSubmit}
+                />
+
+                <ImagePopup
+                  card={selectedCard.card}
+                  isOpen={selectedCard.isOpen}
+                  onClose={closeAllPopups}
+                />
+
+                <DeletePopup
+                  card={isPopupCardDeleteOpen.card}
+                  isOpen={isPopupCardDeleteOpen.isOpen}
+                  onClose={closeAllPopups}
+                  onDelete={handleCardDelete}
+                />
+                { registerSuccess && <InfoTooltip success /> }
+              
+            </CurrentUserContext.Provider>
+          )}
         />
         <Footer />
-
-        <EditAvatarPopup
-          isOpen={isPopupAvatarEditOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        />
-
-        <EditProfilePopup
-          isOpen={isPopupProfileOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
-
-        <AddPlacePopup
-          isOpen={isPopupAddPlaceOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-        />
-
-        <ImagePopup
-          card={selectedCard.card}
-          isOpen={selectedCard.isOpen}
-          onClose={closeAllPopups}
-        />
-
-        <DeletePopup
-          card={isPopupCardDeleteOpen.card}
-          isOpen={isPopupCardDeleteOpen.isOpen}
-          onClose={closeAllPopups}
-          onDelete={handleCardDelete}
-        />
-      </CurrentUserContext.Provider>
+        <Route path="*">
+          <PageNotFound />
+        </Route>
+      </Switch>
     </div>
   </div>  
   </div>

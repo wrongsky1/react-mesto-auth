@@ -1,2 +1,9 @@
 @import url(./__image/tool-tip__image.css);
 @import url(./__title/tool-tip__title.css);
+
+.tool-tip {
+    text-align: center;
+    color: black;
+    width: 100%;
+    margin: 0 auto;
+}

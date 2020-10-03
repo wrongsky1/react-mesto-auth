@@ -1,8 +1,13 @@
 @import url(./__logo/header__logo.css);
+@import url(./__info/header__info.css);
+@import url(./__email/header__email.css);
+@import url(./__sign-out/header__sign-out.css);
+@import url(./_burger-menu/header_burger-menu.css);
 
 .header {
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: flex-start;
   margin: 45px auto 0;
   border-bottom: 1px solid #545454;
