@@ -16,7 +16,7 @@ function InfoTooltip({ success, message }) {
       onClose={handleClose}
     >
       <img className="tool-tip__image" src={success ? registerSuccess : loginFail} alt={success ? 'Инфо картинка об успешной регистрации' : 'Инфо-картинка о неудачной попытке ввода данных'} />
-      <h2 className="tool-tip__title">{success ? 'Вы успешно зарегистировались!' : message || 'Что-то пошло не так! Попробуйте еще раз.' }</h2>
+      <h2 className="tool-tip__title">{success ? 'Вы успешно зарегистировались!' : 'Что-то пошло не так! Попробуйте еще раз.' }</h2>
     </PopupWithForm>
   );
 }

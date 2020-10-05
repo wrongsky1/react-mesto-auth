@@ -10,7 +10,7 @@
 }
   
 .header__sign-out:hover {
-  opacity: .8;
+  opacity: 0.8;
   transform: scale(1.03);
 }
 

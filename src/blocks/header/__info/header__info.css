@@ -6,6 +6,12 @@
   height: 22px;
 }
 
+@media screen and (max-width: 1000px) {
+  .header__info {
+    margin-right: 30px;
+  }
+}
+
 @media screen and (max-width: 650px) {
   .header__info {
   font-size: 15px;
@@ -23,7 +29,5 @@
   left: 0;
   right: 0;
   margin: -139px auto 0;
-    /* 139px =  27px до верхней линнии хедера + высота самого блока header__info + 
-        40px от линии до блока + маржины между email и button 18px  */
   }
 }

@@ -10,4 +10,21 @@
 .login {
     display: flex;
     flex-direction: column;
+    width: 880px;
+    align-items: center;
+    justify-content: center;
 }
+
+@media screen and (max-width: 882px) {
+    .login {
+      width: 582px;
+    }
+}
+
+@media screen and (max-width: 582px) {
+    .login {
+      width: 282px;
+    }
+}
+
+  

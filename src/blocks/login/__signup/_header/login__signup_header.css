@@ -11,19 +11,20 @@
 }
 
 .login__signup_header:hover {
-    opacity: .8;
-    transform: scale(1.03); 
+    opacity: 0.8; 
+}
+
+@media screen and (max-width: 1000px) {
+    .login__signup_header {
+        margin-right: 30px;
+    }
 }
 
 @media screen and (max-width: 650px) {
     .login__signup_header {
         font-size: 15px;
         line-height: 18px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .login__signup_header {
         margin-right: 30px;
     }
 }
+

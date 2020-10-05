@@ -6,10 +6,11 @@
 
 .header {
   width: 100%;
+  height: 74px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 45px auto 0;
+  margin: 40px auto 0;
   border-bottom: 1px solid #545454;
   flex-shrink: 0;
 }
@@ -17,5 +18,6 @@
 @media screen and (max-width: 350px) {
   .header {
     margin: 28px auto 0;
+    height: 56px;
   }
 }
