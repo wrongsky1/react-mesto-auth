@@ -11,10 +11,9 @@
   
 .header__sign-out:hover {
   opacity: 0.8;
-  transform: scale(1.03);
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 640px) {
   .header__sign-out {
     margin-left: 0;
   }

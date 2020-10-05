@@ -10,7 +10,7 @@ function PageNotFound() {
       </Header>
       <section className="not-found">
         <p className="not-found__error">404</p>
-        <h2 className="not-found__title">Кажется страница не найдена. Проверьте введенный вами адрес.</h2>
+        <h2 className="not-found__title">Неправильно набран адрес или такой страницы на сайте не существует.</h2>
       </section>
     </>
   );

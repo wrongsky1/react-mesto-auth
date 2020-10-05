@@ -6,7 +6,6 @@ import '../index.css';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup'
@@ -38,6 +37,7 @@ function handleError (error) {
 }
 
 React.useEffect(() => {
+  handleCheckToken();
   Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([user, initialCards]) => {
       setCurrentUser(user)
